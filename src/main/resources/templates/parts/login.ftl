@@ -19,14 +19,16 @@
             <input type="email" name="email" class="form-control mb-4" placeholder="some@some.com">
         </div>
     </div>
-    </#if>
-    <input type="hidden" name="_csrf" value="${_csrf.token}" />
-    <#if !isRegisterForm><a href="/registration">Add new user</a></#if>
+</#if>
+<input type="hidden" name="_csrf" value="${_csrf.token}" />
+<#if !isRegisterForm><a href="/registration">Add new user</a></#if>
 <button type="submit" class="btn btn-primary"><#if isRegisterForm>Create<#else>Sign in</#if></button>
 </form>
 </#macro>
 
 <#macro logout>
-<input type="hidden" name="_csrf" value="${_csrf.token}" />
-<button type="submit" class="btn btn-primary my-2 my-sm-0">Sign Out</button>
+<form action="/logout" method="post">
+    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+    <button type="submit" class="btn btn-primary my-2 my-sm-0">Sign Out</button>
+</form>
 </#macro>

@@ -18,7 +18,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="/user">User list</a>
             </li>
-        </#if>
+            </#if>
+            <#if user??>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/profile">User profile</a>
+            </li>
+            </#if>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <div class="navbar-text mr-sm-2">${name}</div>
