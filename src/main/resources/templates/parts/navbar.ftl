@@ -6,29 +6,33 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
             </li>
+            <#if user??>
             <li class="nav-item">
                 <a class="nav-link" href="/main">Messages</a>
             </li>
-            <#if isAdmin>
             <li class="nav-item">
-                <a class="nav-link" href="/user">User list</a>
+                <a class="nav-link" href="/user-messages/${currentUserId}">My messages</a>
             </li>
-            </#if>
-            <#if user??>
-            <li class="nav-item">
-                <a class="nav-link" href="/user/profile">User profile</a>
-            </li>
-            </#if>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <div class="navbar-text mr-sm-2">${name}</div>
-            <@l.logout />
-        </form>
-    </div>
+        </#if>
+        <#if isAdmin>
+        <li class="nav-item">
+            <a class="nav-link" href="/user">User list</a>
+        </li>
+    </#if>
+    <#if user??>
+    <li class="nav-item">
+        <a class="nav-link" href="/user/profile">Profile</a>
+    </li>
+</#if>
+</ul>
 
+<div class="navbar-text mr-3">${name}</div>
+<@l.logout />
+</div>
 </nav>
