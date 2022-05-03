@@ -25,7 +25,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String uploadFullPath = "file:///" + uploadPath + "/";
+        String uploadFullPath = "file://" + uploadPath + "/";
         registry.addResourceHandler("img/**")
                 .addResourceLocations(uploadFullPath);
         registry.addResourceHandler("/static/**")
