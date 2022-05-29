@@ -81,8 +81,7 @@ public class MessageController {
         }
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
-        model.addAttribute("url", "/main");
-        return "main";
+        return "redirect:/main";
     }
 
     private void saveFile(Message message, MultipartFile file) throws IOException {
