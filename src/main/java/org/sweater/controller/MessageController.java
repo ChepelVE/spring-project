@@ -67,7 +67,7 @@ public class MessageController {
             @Valid Message message,
             BindingResult bindingResult,
             Model model,
-            @RequestParam("file")MultipartFile file
+            @RequestParam("file") MultipartFile file
     ) throws IOException {
         message.setAuthor(user);
         if (bindingResult.hasErrors()) {
@@ -101,21 +101,21 @@ public class MessageController {
 
     @GetMapping("/user-messages/{author}")
     public String userMessages(
-            @AuthenticationPrincipal User currentUser,
+            @AuthenticationPrincipal User user,
             @PathVariable User author,
             Model model,
             @RequestParam(required = false) Message message,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Page<MessageDto> page = messageService.messageListForUser(pageable, currentUser, author);
+        Page<MessageDto> page = messageService.messageListForUser(pageable, user, author);
         model.addAttribute("subscriptionsCount", author.getSubscriptions().size());
         model.addAttribute("subscribersCount", author.getSubscribers().size());
         model.addAttribute("userChannel", author);
-        model.addAttribute("isSubscriber", author.getSubscribers().contains(currentUser));
+        model.addAttribute("isSubscriber", author.getSubscribers().contains(user));
         model.addAttribute("url", "/user-messages/" + author.getId());
         model.addAttribute("page", page);
         model.addAttribute("message", message);
-        model.addAttribute("isCurrentUser", currentUser.equals(author));
+        model.addAttribute("isCurrentUser", user.equals(author));
 
         return "userMessages";
     }
@@ -127,7 +127,7 @@ public class MessageController {
             @RequestParam("id") Message message,
             @RequestParam("text") String text,
             @RequestParam("tag") String tag,
-            @RequestParam("file")MultipartFile file
+            @RequestParam("file") MultipartFile file
     ) throws IOException {
         if (message.getAuthor().equals(currentUser)) {
             if (!ObjectUtils.isEmpty(text)) {
